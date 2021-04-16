@@ -6,8 +6,6 @@ const SALT_ROUNDS = 10;
 
 const registerAdmin = (req, res) => {
   const { email, password } = req.body;
-  // TODO: Move to util
-  if (!email || !password) return res.status(400).send({ message: 'Email или пароль не могут быть пустыми' });
 
   return bcrypt.hash(password, SALT_ROUNDS, (error, hash) => {
     return Admin.findOne({ email })
@@ -26,8 +24,6 @@ const registerAdmin = (req, res) => {
 
 const authAdmin = (req, res) => {
   const { email, password } = req.body;
-  // TODO: Move to util
-  if (!email || !password) return res.status(400).send({ message: 'Email или пароль не могут быть пустыми' });
 
   return Admin.findOne({ email })
     .then((admin) => {
